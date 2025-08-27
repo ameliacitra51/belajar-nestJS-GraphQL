@@ -1,0 +1,279 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type AuthResponse {
+  accessToken: String!
+  email: String!
+  id: String!
+  name: String!
+  role: String!
+}
+
+type Category {
+  id: String!
+  name: String!
+}
+
+type Course {
+  category: Category!
+  categoryId: String
+  createdAt: DateTime!
+  description: String
+  id: ID!
+  instructor: User!
+  instructorId: String!
+  price: Float!
+  title: String!
+  updatedAt: DateTime!
+}
+
+input CreateCategoryDto {
+  name: String!
+}
+
+input CreateCourseInput {
+  categoryId: String!
+  description: String
+  price: Float!
+  title: String!
+}
+
+input CreateEnrollmentInput {
+  courseId: String!
+  status: String
+  userId: String!
+}
+
+input CreateLessonInput {
+  content: String!
+  order: Int! = 1
+  sectionId: String!
+  title: String!
+  video_url: String
+}
+
+input CreateProgressInput {
+  lessonId: String!
+  status: String
+  userId: String!
+}
+
+input CreateReviewInput {
+  comment: String!
+  courseId: String!
+  rating: Int!
+  userId: String!
+}
+
+input CreateSectionInput {
+  courseId: ID!
+  order: Float!
+  title: String!
+}
+
+input CreateUserInput {
+  email: String!
+  name: String!
+  password: String!
+  role: Role
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Enrollment {
+  course: Course!
+  courseId: String!
+  id: ID!
+  status: String!
+  user: User!
+  userId: String!
+}
+
+type Lesson {
+  content: String!
+  createdAt: DateTime!
+  id: ID!
+  order: Float!
+  section: Section!
+  sectionId: String!
+  title: String!
+  updatedAt: DateTime!
+  video_url: String!
+}
+
+input LoginDto {
+  email: String!
+  password: String!
+}
+
+type LoginResponse {
+  accessToken: String!
+  user: LoginUser!
+}
+
+type LoginUser {
+  email: String!
+  id: String!
+  name: String!
+  role: String!
+}
+
+type Mutation {
+  createCategory(createCategoryInput: CreateCategoryDto!): Category!
+  createCourse(createCourseInput: CreateCourseInput!): Course!
+  createEnrollment(createEnrollmentInput: CreateEnrollmentInput!): Enrollment!
+  createLesson(createLessonInput: CreateLessonInput!): Lesson!
+  createProgress(createProgressInput: CreateProgressInput!): Progress!
+  createReview(createReviewInput: CreateReviewInput!): Review!
+  createSection(createSectionInput: CreateSectionInput!): Section!
+  createUser(createUserInput: CreateUserInput!): User!
+  login(data: LoginDto!): LoginResponse!
+  register(data: RegisterDto!): AuthResponse!
+  removeCategory(id: ID!): Category!
+  removeCourse(id: ID!): Course!
+  removeEnrollment(id: ID!): Enrollment!
+  removeLesson(id: ID!): Lesson!
+  removeProgress(id: ID!): Progress!
+  removeReview(id: ID!): Review!
+  removeSection(id: ID!): Section!
+  removeUser(id: ID!): User!
+  updateCategory(updateCategoryInput: UpdateCategoryInput!): Category!
+  updateCourse(updateCourseInput: UpdateCourseInput!): Course!
+  updateEnrollment(updateEnrollmentInput: UpdateEnrollmentInput!): Enrollment!
+  updateLesson(updateLessonInput: UpdateLessonInput!): Lesson!
+  updateProgress(updateProgressInput: UpdateProgressInput!): Progress!
+  updateReview(updateReviewInput: UpdateReviewInput!): Review!
+  updateSection(updateSectionInput: UpdateSectionInput!): Section!
+  updateUser(updateUserInput: UpdateUserInput!): User!
+}
+
+type Progress {
+  id: ID!
+  lesson: Lesson!
+  lessonId: String!
+  status: String!
+  updatedAt: DateTime!
+  user: User!
+  userId: String!
+}
+
+type Query {
+  category(id: ID!): Category!
+  course(id: ID!): Course!
+  courses: [Course!]!
+  enrollment(id: ID!): Enrollment!
+  enrollments: [Enrollment!]!
+  lesson(id: ID!): Lesson!
+  lessons: [Lesson!]!
+  progress(id: ID!): Progress!
+  review(id: ID!): Review!
+  reviews: [Review!]!
+  section(id: ID!): Section!
+  sections: [Section!]!
+  user: [User!]!
+  users(id: ID!): User!
+}
+
+input RegisterDto {
+  email: String!
+  name: String!
+  password: String!
+  role: String
+}
+
+type Review {
+  comment: String!
+  course: Course!
+  courseId: String!
+  id: ID!
+  rating: Float!
+  user: User!
+  userId: String!
+}
+
+enum Role {
+  ADMIN
+  INSTRUCTOR
+  STUDENT
+}
+
+type Section {
+  course: Course!
+  courseId: String!
+  createdAt: DateTime!
+  id: ID!
+  order: Float!
+  title: String!
+  updatedAt: DateTime!
+}
+
+input UpdateCategoryInput {
+  id: ID!
+  name: String
+}
+
+input UpdateCourseInput {
+  categoryId: String
+  description: String
+  id: ID!
+  price: Float
+  title: String
+}
+
+input UpdateEnrollmentInput {
+  courseId: String
+  id: ID!
+  status: String
+  userId: String
+}
+
+input UpdateLessonInput {
+  content: String
+  id: ID!
+  order: Int = 1
+  sectionId: String
+  title: String
+  video_url: String
+}
+
+input UpdateProgressInput {
+  id: ID!
+  lessonId: String
+  status: String
+  userId: String
+}
+
+input UpdateReviewInput {
+  comment: String
+  courseId: String
+  id: ID!
+  rating: Int
+  userId: String
+}
+
+input UpdateSectionInput {
+  courseId: ID
+  id: ID!
+  order: Float
+  title: String
+}
+
+input UpdateUserInput {
+  email: String
+  id: ID!
+  name: String
+  password: String
+  role: Role
+}
+
+type User {
+  email: String!
+  id: ID!
+  name: String!
+  password: String
+  role: String!
+}
